@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  web:
+    image: python:3.11-slim
+    command: python3 -m http.server 8000
+    environment:
+      - ROLL_NO=55420
+    ports:
+      - "8020:8000"
+    networks:
+      - my-network
+    volumes:
+      - my-data:/app/data
+
+  redis-service:
+    image: redis:alpine
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
+
+volumes:
+  my-data:
